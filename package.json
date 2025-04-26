@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "start": "cd backend && node server.js",
+    "start": "node backend/server.js",
     "backend": "cd backend && npm run dev",
     "frontend": "cd frontend && npm start",
     "dev": "powershell -Command \"Start-Process powershell -ArgumentList '-Command cd backend; npm run dev' ; Start-Process powershell -ArgumentList '-Command cd frontend; npm start'\"",
@@ -19,7 +19,6 @@
     "mern",
     "react",
     "express",
-    "mongodb",
     "nodejs",
     "task-manager"
   ],

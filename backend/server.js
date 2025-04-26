@@ -34,11 +34,16 @@ const BUILD_PATH = process.env.NODE_ENV === 'production'
 // Serve static files
 app.use(express.static(BUILD_PATH));
 
-// Handle React routing, return all requests to React app
-app.get('*', function(req, res) {
-  // Don't use path-to-regexp for this route
+// Explicitly define routes to avoid path-to-regexp issues
+app.get('/login', serveIndex);
+app.get('/register', serveIndex);
+app.get('/dashboard', serveIndex);
+app.get('/', serveIndex);
+
+// Function to serve the index.html file
+function serveIndex(req, res) {
   res.sendFile(path.join(BUILD_PATH, 'index.html'));
-});
+}
 
 // Start server
 const PORT = process.env.PORT || 5000;

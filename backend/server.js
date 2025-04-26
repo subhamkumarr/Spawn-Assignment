@@ -21,6 +21,11 @@ const authRoutes = require('./routes/authRoutes');
 app.use('/tasks', taskRoutes);
 app.use('/auth', authRoutes);
 
+// Root route for API check
+app.get('/api', (req, res) => {
+  res.send('Task Manager API is running');
+});
+
 // Serve static assets in production
 const BUILD_PATH = process.env.NODE_ENV === 'production' 
   ? path.join(__dirname, '../frontend/build')
@@ -29,13 +34,9 @@ const BUILD_PATH = process.env.NODE_ENV === 'production'
 // Serve static files
 app.use(express.static(BUILD_PATH));
 
-// Root route for API check
-app.get('/api', (req, res) => {
-  res.send('Task Manager API is running');
-});
-
 // Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
+app.get('*', function(req, res) {
+  // Don't use path-to-regexp for this route
   res.sendFile(path.join(BUILD_PATH, 'index.html'));
 });
 
